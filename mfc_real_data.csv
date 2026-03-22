@@ -1,0 +1,14 @@
+WW_Type,Volume,COD_in,BOD_in,pH_in,Voltage,Power_Density,Coulombic_Efficiency,COD_out,BOD_out,pH_out,Reference,Category
+0,1000,4000,2400,7.0,0.320,12.26,20.0,400,120,7.1,ResearchGate/Ref 2 (Batch Cycle),Real
+0,2000,4000,2400,7.0,0.650,20.71,25.0,350,100,7.1,ResearchGate/Ref 3 (Parallel Stack),Real
+0,500,3000,1800,7.2,0.405,279.19,15.0,300,90,7.0,IntechOpen/Ref 4 (Graphite),Real
+0,500,3000,1800,7.2,0.423,1211.0,18.0,360,110,7.0,IntechOpen/Ref 4 (Brass),Real
+0,1000,5000,3000,7.0,0.550,700.0,22.0,1500,450,7.1,ResearchGate/Ref 5 (DC-MFC),Real
+0,250,6000,3600,7.0,1.163,450.0,30.0,300,80,7.1,funaab.edu.ng/Ref 7 (Catholyte),Real
+1,1000,2500,1400,7.5,0.961,331.55,18.0,575,150,7.4,inarah.co.id/Ref 1 (Zn/Cu),Real
+1,1000,2500,1400,7.5,0.700,149.17,12.0,625,180,7.4,inarah.co.id/Ref 2 (Al/Cu),Real
+1,5000,1500,800,8.0,0.350,50.0,8.0,615,200,7.2,ResearchGate/Ref 4 (Farming Recirc),Real
+1,100,4500,2700,7.0,0.988,2960.7,25.0,1020,300,7.1,IRJET/Ref 5 (Seafood Processing),Real
+1,2000,3500,2000,7.2,0.500,105.0,10.0,595,160,7.2,cup.edu.in/Ref 6 (Upflow MFC),Real
+2,2000,4500,2600,7.3,0.850,850.0,28.0,450,130,7.2,Estimated Synergy (Protein-Nutrient),Synthetic
+2,1000,5000,3000,7.0,1.250,1400.0,32.0,500,140,7.2,Estimated Synergy (High Load),Synthetic
