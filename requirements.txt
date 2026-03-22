@@ -4,3 +4,6 @@ numpy
 joblib
 plotly
 scikit-learn
+statsmodels
+scipy
+
