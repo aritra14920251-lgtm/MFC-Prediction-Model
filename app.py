@@ -42,9 +42,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- Header ---
-st.title("⚡ MFC Dual-Mode Prediction Dashboard")
+st.title("⚡ Dual-Mode Prediction Model of Simultaneous Wastewater Treatment and Electricity Generation Using Microbial Fuel Cell [MFC]")
 st.markdown("""
-Research-grounded predictions for **Slaughterhouse** and **Shrimp** MFC systems.
+Research-grounded predictions for **Slaughterhouse Blood Wastewater (SBWW)** and **Shrimp Industry Wastewater (SIWW)** MFC systems.
 Toggle between patterns learned from **2000 augmented samples** or **Real-World Corrected** bias.
 """)
 
