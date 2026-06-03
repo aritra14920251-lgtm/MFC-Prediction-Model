@@ -4,13 +4,33 @@ import numpy as np
 import joblib
 import plotly.express as px
 import plotly.graph_objects as go
+import sys
+import sklearn._loss as sklearn_loss
+from pathlib import Path
 from sklearn.metrics.pairwise import euclidean_distances
+
+# Compatibility shim for scikit-learn pickle formats saved with legacy loss classes.
+# Some GradientBoostingRegressor pickles reference old sklearn names like CyHalfSquaredError.
+sys.modules['_loss'] = sklearn_loss
+legacy_loss_aliases = {
+    'CyHalfSquaredError': 'HalfSquaredError',
+    'CyAbsoluteError': 'AbsoluteError',
+    'CySquaredError': 'SquaredError'
+}
+for alias_name, current_name in legacy_loss_aliases.items():
+    if not hasattr(sklearn_loss, alias_name) and hasattr(sklearn_loss, current_name):
+        setattr(sklearn_loss, alias_name, getattr(sklearn_loss, current_name))
+
+ROOT_DIR = Path(__file__).resolve().parent
 
 # --- Page Config ---
 st.set_page_config(page_title="MFC Dual-Mode Predictor", page_icon="⚡", layout="wide")
 
 # --- Feature Engineering (Must match mfc_model.py) ---
 def engineer_features(df):
+    """
+    Perform feature engineering for the MFC input data.
+    """
     df['BOD_COD_Ratio'] = df['BOD_in'] / (df['COD_in'] + 1e-6)
     df['Organic_Load'] = (df['COD_in'] * df['Volume']) / 1000.0
     df['pH_Dev'] = abs(df['pH_in'] - 7.2)
@@ -19,16 +39,34 @@ def engineer_features(df):
 # --- Load Model & Data ---
 @st.cache_resource
 def load_assets():
-    model = joblib.load("mfc_trained_model.pkl")
-    df = pd.read_csv("mfc_data_v2.csv")
+    """
+    Load the trained model and dataset from disk.
+    """
+    model_path = ROOT_DIR / "mfc_trained_model.pkl"
+    data_path = ROOT_DIR / "mfc_data_v2.csv"
+
+    missing = []
+    if not model_path.exists():
+        missing.append(str(model_path))
+    if not data_path.exists():
+        missing.append(str(data_path))
+    if missing:
+        raise FileNotFoundError(f"Missing required file(s): {', '.join(missing)}")
+
+    model = joblib.load(model_path)
+    df = pd.read_csv(data_path)
     # Map numbers to names for better visualization
     df['Wastewater_Type'] = df['WW_Type'].map({0: 'SBWW', 1: 'SIWW', 2: 'MIX'})
     return model, df
 
 try:
     model, df = load_assets()
-except:
-    st.error("Model or data not found. Please run scripts first.")
+except Exception as err:
+    st.error(f"Model or data not found: {err}")
+    st.write(f"Expected model path: {ROOT_DIR / 'mfc_trained_model.pkl'}")
+    st.write(f"Expected data path: {ROOT_DIR / 'mfc_data_v2.csv'}")
+    st.write(f"Model file exists: {(ROOT_DIR / 'mfc_trained_model.pkl').exists()}")
+    st.write(f"Data file exists: {(ROOT_DIR / 'mfc_data_v2.csv').exists()}")
     st.stop()
 
 # --- Custom Styling ---
@@ -42,9 +80,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- Header ---
-st.title("⚡ Dual-Mode Prediction Model of Simultaneous Wastewater Treatment and Electricity Generation Using Microbial Fuel Cell [MFC]")
+st.title("⚡ MFC Dual-Mode Prediction Dashboard")
 st.markdown("""
-Research-grounded predictions for **Slaughterhouse Blood Wastewater (SBWW)** and **Shrimp Industry Wastewater (SIWW)** MFC systems.
+Research-grounded predictions for **Slaughterhouse** and **Shrimp** MFC systems.
 Toggle between patterns learned from **2000 augmented samples** or **Real-World Corrected** bias.
 """)
 
@@ -58,7 +96,7 @@ volume = st.sidebar.number_input("Volume (mL)", 100, 10000, 1000, step=100)
 cod_in = st.sidebar.number_input("Initial COD (ppm)", 500, 8000, 2500, step=50)
 bod_in = st.sidebar.number_input("Initial BOD (ppm)", 200, 5000, 1200, step=50)
 ph_in = st.sidebar.number_input("Initial pH Value", 4.0, 11.0, 7.0, step=0.1)
-
+  
 st.sidebar.divider()
 st.sidebar.subheader("⚙️ Prediction Control")
 prediction_mode = st.sidebar.radio("Primary Mode", ["Real-World Corrected", "Grounded Synthetic"], 
@@ -67,6 +105,9 @@ compare_mode = st.sidebar.checkbox("Compare Both Modes", value=True)
 
 # --- Prediction Logic ---
 def get_prediction(is_real):
+    """
+    Generate predictions using the ensemble model.
+    """
     input_df = pd.DataFrame([[ww_type, volume, cod_in, bod_in, ph_in]], 
                             columns=['WW_Type', 'Volume', 'COD_in', 'BOD_in', 'pH_in'])
     input_eng = engineer_features(input_df.copy())
