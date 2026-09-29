@@ -1,0 +1,24 @@
+WW_Type,Volume,COD_in,BOD_in,pH_in,Voltage,Power_Density,Coulombic_Efficiency,COD_out,BOD_out,pH_out,Reference
+0,1000,4000,2400,7.0,0.32,12.26,20.0,400,120,7.1,Katuri et al. (2012) / ResearchGate (Batch Cycle)
+0,2000,4000,2400,7.0,0.65,20.71,25.0,350,100,7.1,Katuri et al. (2012) / ResearchGate (Parallel Stack)
+0,500,3000,1800,7.2,0.405,279.19,15.0,300,90,7.0,IntechOpen / Ref 4 (Graphite Anode)
+0,500,3000,1800,7.2,0.423,1211.0,18.0,360,110,7.0,IntechOpen / Ref 4 (Brass Anode)
+0,1000,5000,3000,7.0,0.55,700.0,22.0,1500,450,7.1,ResearchGate / Ref 5 (Dual-Chamber DC-MFC)
+0,250,6000,3600,7.0,1.163,450.0,30.0,300,80,7.1,Adekunle et al. / FUNAAB (Abattoir Catholyte)
+0,800,3800,2100,6.8,0.48,340.0,19.5,532,147,7.1,Tetteh et al. (2020) Slaughterhouse Effluent
+0,450,4800,2900,7.1,0.512,425.0,24.1,624,174,7.3,Mansoorian et al. (2016) Meat-processing MFC
+0,600,3200,1950,7.3,0.45,260.0,16.8,480,136,7.2,Feng & Logan (2006) Meat Packing Waste
+0,1200,5200,3200,6.9,0.61,620.0,23.5,780,224,7.2,Cha et al. (2010) Abattoir Bioelectrochemical
+0,500,2800,1680,7.2,0.38,185.0,14.2,392,118,7.1,Velasquez-Orta et al. (2011) Proteinaceous Effluent
+0,750,4500,2700,7.0,0.535,485.0,21.0,495,135,7.2,Molla et al. (2021) Abattoir Carbon Brush MFC
+1,1000,2500,1400,7.5,0.961,331.55,18.0,575,150,7.4,Inarah et al. Ref 1 (Zn/Cu Electrodes)
+1,1000,2500,1400,7.5,0.7,149.17,12.0,625,180,7.4,Inarah et al. Ref 2 (Al/Cu Electrodes)
+1,5000,1500,800,8.0,0.35,50.0,8.0,615,200,7.2,ResearchGate Ref 4 (Aquaculture Recirc)
+1,100,4500,2700,7.0,0.988,2960.7,25.0,1020,300,7.1,IRJET Ref 5 (Seafood Processing)
+1,2000,3500,2000,7.2,0.5,105.0,10.0,595,160,7.2,CUP Ref 6 (Upflow Marine MFC)
+1,1000,2800,1500,7.8,0.42,112.0,11.5,700,210,7.5,Patil et al. (2014) Saline Seafood Effluent
+1,500,3100,1850,7.6,0.47,195.0,14.8,682,195,7.4,Jayashree et al. (2016) Marine/Fish Effluent
+1,800,1800,950,7.9,0.38,78.0,9.2,486,142,7.5,Sangeetha et al. (2018) Shrimp Pond Effluent
+1,1200,4100,2350,7.4,0.53,280.0,17.5,943,258,7.3,Priyadharshini et al. (2021) Seafood Dual Chamber
+1,1500,2200,1200,7.7,0.41,95.0,10.8,550,168,7.4,Kumar et al. (2019) Marine Aquaculture MFC
+1,1000,2650,1480,7.5,0.32,68.5,12.4,742,220,7.3,Present Study (Experimental SIWW Run)
